@@ -36,6 +36,20 @@ public class StandardBookService implements BookService {
             borrowingRepository.delete(borrowing);
         }
     }
+    
+    @Override
+    public void returnBookByBorrowerAndIsbn(String borrowerEmailAddress, String isbn) {
+        List<Borrowing> borrowingsByUser = borrowingRepository
+                .findBorrowingsByBorrower(borrowerEmailAddress);
+        Book book = bookRepository.findBookByIsbn(isbn);
+        Borrowing borrowingForBook = borrowingRepository.findBorrowingForBook(book);
+        for (Borrowing borrowing : borrowingsByUser) {
+        	
+        	if (borrowing.equals(borrowingForBook)) {
+        		borrowingRepository.delete(borrowing);
+        	}
+        }
+    }
 
     @Override
     public void borrowBook(Book book, String borrowerEmail) throws BookAlreadyBorrowedException {

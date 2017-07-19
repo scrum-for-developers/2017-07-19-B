@@ -48,6 +48,16 @@ public class StandardBookServiceTest {
 	}
 
 	@Test
+	public void shouldReturnByBorrowerAndIsbn() {
+		Borrowing borrowing = new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW);
+		List<Borrowing> result = Collections.singletonList(borrowing);
+		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL))
+		.thenReturn(result);
+		bookService.returnBookByBorrowerAndIsbn(BORROWER_EMAIL, "isbn");
+		verify(borrowingRepository).delete(borrowing);
+	}
+
+	@Test
 	public void shouldSaveBorrowingWithBorrowerEmail() throws Exception {
 		when(borrowingRepository.findBorrowingForBook(TEST_BOOK)).thenReturn(null);
 		ArgumentCaptor<Borrowing> borrowingArgumentCaptor = ArgumentCaptor.forClass(Borrowing.class);
