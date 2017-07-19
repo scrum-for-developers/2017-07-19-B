@@ -9,6 +9,8 @@ public interface BookService {
 
 	void returnAllBooksByBorrower(String string);
 
+	void returnSingleBookByBorrowerAndIsbn(String burrower, String isbn);
+
 	void borrowBook(Book book, String borrower) throws BookAlreadyBorrowedException;
 
 	Book findBookByIsbn(String isbn);
