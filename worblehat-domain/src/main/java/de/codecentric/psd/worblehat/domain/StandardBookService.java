@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 @Transactional
 public class StandardBookService implements BookService {
+
 	public StandardBookService() {
 
 	}
@@ -34,6 +35,14 @@ public class StandardBookService implements BookService {
 		for (Borrowing borrowing : borrowingsByUser) {
 			borrowingRepository.delete(borrowing);
 		}
+	}
+
+	@Override
+	public void returnSingleBookByIsbn(String isbn) {
+
+		Book book = bookRepository.findBookByIsbn(isbn);
+		Borrowing borrowingForBook = borrowingRepository.findBorrowingForBook(book);
+		borrowingRepository.delete(borrowingForBook);
 	}
 
 	@Override
@@ -73,14 +82,6 @@ public class StandardBookService implements BookService {
 	public void deleteAllBooks() {
 		borrowingRepository.deleteAll();
 		bookRepository.deleteAll();
-	}
-
-	@Override
-	public void returnSingleBookByBorrowerAndIsbn(String burrower, String isbn) {
-//		List<Borrowing> borrowingsByUser = borrowingRepository.????????(burrower, isbn);
-//		for (Borrowing borrowing : borrowingsByUser) {
-//			borrowingRepository.delete(borrowing);
-//		}
 	}
 
 }
