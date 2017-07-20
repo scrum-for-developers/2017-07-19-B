@@ -17,35 +17,35 @@ import static org.mockito.Mockito.when;
 
 public class BookListControllerTest {
 
-    private BookService bookService;
+	private BookService bookService;
 
-    private BookListController bookListController;
+	private BookListController bookListController;
 
-    private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016);
+	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "description");
 
-    private ModelMap modelMap;
+	private ModelMap modelMap;
 
-    @Before
-    public void setUp() throws Exception {
-        bookService = mock(BookService.class);
-        bookListController = new BookListController(bookService);
-        modelMap = new ModelMap();
-    }
+	@Before
+	public void setUp() throws Exception {
+		bookService = mock(BookService.class);
+		bookListController = new BookListController(bookService);
+		modelMap = new ModelMap();
+	}
 
-    @Test
-    public void shouldNavigateToBookList() throws Exception {
-        String url = bookListController.setupForm(modelMap);
-        assertThat(url, is("bookList"));
-    }
+	@Test
+	public void shouldNavigateToBookList() throws Exception {
+		String url = bookListController.setupForm(modelMap);
+		assertThat(url, is("bookList"));
+	}
 
-    @Test
-    public void shouldContainBooks() throws Exception {
-        List<Book> bookList = new ArrayList();
-        bookList.add(TEST_BOOK);
-        when(bookService.findAllBooks()).thenReturn(bookList);
-        bookListController.setupForm(modelMap);
-        List<Book> actualBooks = (List<Book>)modelMap.get("books");
-        assertThat(actualBooks, is(bookList));
-    }
+	@Test
+	public void shouldContainBooks() throws Exception {
+		List<Book> bookList = new ArrayList();
+		bookList.add(TEST_BOOK);
+		when(bookService.findAllBooks()).thenReturn(bookList);
+		bookListController.setupForm(modelMap);
+		List<Book> actualBooks = (List<Book>) modelMap.get("books");
+		assertThat(actualBooks, is(bookList));
+	}
 
 }
