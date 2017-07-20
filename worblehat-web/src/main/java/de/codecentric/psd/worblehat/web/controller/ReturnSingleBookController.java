@@ -2,6 +2,7 @@ package de.codecentric.psd.worblehat.web.controller;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -38,7 +39,7 @@ public class ReturnSingleBookController {
 		if (result.hasErrors()) {
 			return "returnSingleBook";
 		} else {
-			bookService.returnSingleBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn());
+			bookService.returnSingleBookByBorrowerAndIsbn(StringUtils.trim(formData.getEmailAddress()), StringUtils.trim(formData.getIsbn()));
 			return "home";
 		}
 	}

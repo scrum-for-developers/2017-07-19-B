@@ -2,6 +2,9 @@ package de.codecentric.psd.worblehat.web.controller;
 
 import de.codecentric.psd.worblehat.domain.BookService;
 import de.codecentric.psd.worblehat.web.formdata.BookDataFormData;
+
+import org.apache.commons.lang.StringUtils;
+import org.codehaus.groovy.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +46,9 @@ public class InsertBookController {
 		if (result.hasErrors()) {
 			return "insertBooks";
 		} else {
-			bookService.createBook(bookDataFormData.getTitle(), bookDataFormData.getAuthor(),
-					bookDataFormData.getEdition(), bookDataFormData.getIsbn(),
-					Integer.parseInt(bookDataFormData.getYearOfPublication()), bookDataFormData.getDescription());
+			bookService.createBook(StringUtils.trim(bookDataFormData.getTitle()), StringUtils.trim(bookDataFormData.getAuthor()),
+					StringUtils.trim(bookDataFormData.getEdition()), StringUtils.trim(bookDataFormData.getIsbn()),
+					Integer.parseInt(StringUtils.trim(bookDataFormData.getYearOfPublication())), StringUtils.trim(bookDataFormData.getDescription()));
 
 			LOG.debug("new book instance is created: " + bookDataFormData.getIsbn());
 			return "redirect:bookList";

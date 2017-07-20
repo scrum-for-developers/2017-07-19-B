@@ -85,12 +85,12 @@ public class InsertBookControllerTest {
                 TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication(), TEST_BOOK.getDescription());
     }
 
-	private void setupFormData() {
-		bookDataFormData.setTitle(TEST_BOOK.getTitle());
-		bookDataFormData.setAuthor(TEST_BOOK.getAuthor());
-		bookDataFormData.setEdition(TEST_BOOK.getEdition());
-		bookDataFormData.setIsbn(TEST_BOOK.getIsbn());
-		bookDataFormData.setYearOfPublication(String.valueOf(TEST_BOOK.getYearOfPublication()));
-		bookDataFormData.setDescription(TEST_BOOK.getDescription());
-	}
+    private void setupFormData() {
+        bookDataFormData.setTitle(TEST_BOOK.getTitle());
+        bookDataFormData.setAuthor(TEST_BOOK.getAuthor());
+        bookDataFormData.setEdition(TEST_BOOK.getEdition());
+        bookDataFormData.setIsbn(" isbn ");
+        bookDataFormData.setYearOfPublication(String.valueOf(TEST_BOOK.getYearOfPublication()));
+        bookDataFormData.setDescription(TEST_BOOK.getDescription());
+    }
 }
