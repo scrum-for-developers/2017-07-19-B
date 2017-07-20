@@ -8,6 +8,7 @@ CREATE TABLE book (
   edition VARCHAR(255),
   isbn VARCHAR(255),
   year_of_publication INT,
+  description VARCHAR(255),
   UNIQUE (isbn)
 );
 
