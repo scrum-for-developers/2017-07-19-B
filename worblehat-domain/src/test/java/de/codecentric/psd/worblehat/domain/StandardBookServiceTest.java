@@ -28,7 +28,7 @@ public class StandardBookServiceTest {
 
 	private static final DateTime NOW = DateTime.now();
 
-	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "desc");
+	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "description");
 
 	@Before
 	public void setup() throws Exception {
@@ -118,3 +118,4 @@ public class StandardBookServiceTest {
 		verify(borrowingRepository).deleteAll();
 	}
 }
+

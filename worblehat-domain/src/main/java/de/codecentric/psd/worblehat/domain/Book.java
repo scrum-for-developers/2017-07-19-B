@@ -80,6 +80,10 @@ public class Book implements Serializable {
 
 	public String getBorrowerEmail() { return borrowing == null ? "" : borrowing.getBorrowerEmailAddress(); }
 
+	public String getDescription() {
+		return description;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -95,6 +99,10 @@ public class Book implements Serializable {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}	
 
 	public void setYearOfPublication(int yearOfPublication) {
 		this.yearOfPublication = yearOfPublication;
@@ -104,11 +112,4 @@ public class Book implements Serializable {
 		this.borrowing = borrowing;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 }
