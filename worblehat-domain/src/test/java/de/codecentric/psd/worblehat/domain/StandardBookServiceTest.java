@@ -28,7 +28,7 @@ public class StandardBookServiceTest {
 
 	private static final DateTime NOW = DateTime.now();
 
-	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016);
+	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "desc");
 
 	@Before
 	public void setup() throws Exception {
@@ -79,7 +79,7 @@ public class StandardBookServiceTest {
 	public void shouldCreateBook() throws Exception {
 		ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
 		bookService.createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(), TEST_BOOK.getEdition(),
-				TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication());
+				TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication(), TEST_BOOK.getdescription());
 		verify(bookRepository).save(bookArgumentCaptor.capture());
 		assertThat(bookArgumentCaptor.getValue().getTitle(), is(TEST_BOOK.getTitle()));
 		assertThat(bookArgumentCaptor.getValue().getAuthor(), is(TEST_BOOK.getAuthor()));

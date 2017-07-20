@@ -33,6 +33,10 @@ public class DemoBookFactory {
         this.book.setIsbn(isbn);
         return this;
     }
+    public DemoBookFactory withBeschreibung(String beschreibung){
+        this.book.setBeschreibung(beschreibung);
+        return this;
+    }
 
     public DemoBookFactory withYearOfPublication(String year){
         this.book.setYearOfPublication(Integer.parseInt(year));

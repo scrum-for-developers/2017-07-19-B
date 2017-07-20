@@ -30,7 +30,7 @@ public class InsertBookControllerTest {
 
     private BindingResult bindingResult;
 
-    private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016);
+    private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "descs");
 
     @Before
     public void setUp() throws Exception {
@@ -82,7 +82,7 @@ public class InsertBookControllerTest {
 
     private void verifyBookIsCreated() {
         verify(bookService).createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(),
-                TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication());
+                TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication(), TEST_BOOK.getdescription());
     }
 
     private void setupFormData() {
