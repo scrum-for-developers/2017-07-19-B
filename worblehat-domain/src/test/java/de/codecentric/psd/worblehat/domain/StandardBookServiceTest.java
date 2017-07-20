@@ -28,7 +28,7 @@ public class StandardBookServiceTest {
 
 	private static final DateTime NOW = DateTime.now();
 
-	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016);
+	private static final Book TEST_BOOK = new Book("title", "author", "edition", "isbn", 2016, "description");
 
 	@Before
 	public void setup() throws Exception {
@@ -41,7 +41,8 @@ public class StandardBookServiceTest {
 	public void shouldReturnAllBooksOfOnePerson() {
 		Borrowing borrowing = new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW);
 		List<Borrowing> result = Collections.singletonList(borrowing);
-		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL)).thenReturn(result);
+		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL))
+		.thenReturn(result);
 		bookService.returnAllBooksByBorrower(BORROWER_EMAIL);
 		verify(borrowingRepository).delete(borrowing);
 	}
@@ -50,11 +51,12 @@ public class StandardBookServiceTest {
 	public void shouldReturnByBorrowerAndIsbn() {
 		Borrowing borrowing = new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW);
 		List<Borrowing> result = Collections.singletonList(borrowing);
-		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL)).thenReturn(result);
+		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL))
+		.thenReturn(result);
 		when(bookRepository.findBookByIsbn("isbn")).thenReturn(TEST_BOOK);
 		when(borrowingRepository.findBorrowingForBook(TEST_BOOK)).thenReturn(borrowing);
-		bookService.returnSingleBookByBorrowerAndIsbn(BORROWER_EMAIL, "isbn");
-
+		bookService.returnBookByBorrowerAndIsbn(BORROWER_EMAIL, "isbn");
+		
 		verify(borrowingRepository).delete(borrowing);
 	}
 
@@ -69,22 +71,22 @@ public class StandardBookServiceTest {
 
 	@Test(expected = BookAlreadyBorrowedException.class)
 	public void shouldThrowExceptionWhenBookAlreadyBorrowed() throws Exception {
-		when(borrowingRepository.findBorrowingForBook(TEST_BOOK))
-				.thenReturn(new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW));
+		when(borrowingRepository.findBorrowingForBook(TEST_BOOK)).thenReturn(new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW));
 		bookService.borrowBook(TEST_BOOK, BORROWER_EMAIL);
 	}
 
 	@Test
 	public void shouldCreateBook() throws Exception {
 		ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
-		bookService.createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(), TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(),
-				TEST_BOOK.getYearOfPublication());
+		bookService.createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(), TEST_BOOK.getEdition(),
+				TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication(), TEST_BOOK.getDescription());
 		verify(bookRepository).save(bookArgumentCaptor.capture());
 		assertThat(bookArgumentCaptor.getValue().getTitle(), is(TEST_BOOK.getTitle()));
 		assertThat(bookArgumentCaptor.getValue().getAuthor(), is(TEST_BOOK.getAuthor()));
 		assertThat(bookArgumentCaptor.getValue().getEdition(), is(TEST_BOOK.getEdition()));
 		assertThat(bookArgumentCaptor.getValue().getIsbn(), is(TEST_BOOK.getIsbn()));
 		assertThat(bookArgumentCaptor.getValue().getYearOfPublication(), is(TEST_BOOK.getYearOfPublication()));
+		assertThat(bookArgumentCaptor.getValue().getDescription(), is(TEST_BOOK.getDescription()));
 	}
 
 	@Test
@@ -117,3 +119,4 @@ public class StandardBookServiceTest {
 		verify(borrowingRepository).deleteAll();
 	}
 }
+
