@@ -53,7 +53,10 @@ public class StandardBookServiceTest {
 		List<Borrowing> result = Collections.singletonList(borrowing);
 		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL))
 		.thenReturn(result);
+		when(bookRepository.findBookByIsbn("isbn")).thenReturn(TEST_BOOK);
+		when(borrowingRepository.findBorrowingForBook(TEST_BOOK)).thenReturn(borrowing);
 		bookService.returnBookByBorrowerAndIsbn(BORROWER_EMAIL, "isbn");
+		
 		verify(borrowingRepository).delete(borrowing);
 	}
 
