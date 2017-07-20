@@ -54,17 +54,17 @@ public class ReturnSingleBookControllerTest {
 
 		assertThat(navigateTo, is("returnSingleBook"));
 	}
-/*
+
 	@Test
 	public void shouldReturnSingleBookAndNavigateHome() throws Exception {
 		String isbn = "isbn";
 		String borrower = "abcde@b.de";
 		returnSingleBookFormData.setIsbn(isbn);
+		returnSingleBookFormData.setEmailAddress(borrower);
 
 		String navigateTo = returnSingleBookController.returnSingleBook(returnSingleBookFormData, bindingResult);
 
 		verify(bookService).returnSingleBookByBorrowerAndIsbn(borrower, isbn);
 		assertThat(navigateTo, is("home"));
 	}
-	*/
 }
