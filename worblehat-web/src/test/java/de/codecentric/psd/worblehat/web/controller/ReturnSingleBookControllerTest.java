@@ -57,12 +57,13 @@ public class ReturnSingleBookControllerTest {
 
 	@Test
 	public void shouldReturnSingleBookAndNavigateHome() throws Exception {
-		String isbn = "1234567890";
+		String isbn = "isbn";
+		String borrower = "abcde@b.de";
 		returnSingleBookFormData.setIsbn(isbn);
 
 		String navigateTo = returnSingleBookController.returnSingleBook(returnSingleBookFormData, bindingResult);
 
-		verify(bookService).returnSingleBookByIsbn(isbn);
+		verify(bookService).returnSingleBookByBorrowerAndIsbn(borrower, isbn);
 		assertThat(navigateTo, is("home"));
 	}
 }

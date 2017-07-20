@@ -41,8 +41,7 @@ public class StandardBookServiceTest {
 	public void shouldReturnAllBooksOfOnePerson() {
 		Borrowing borrowing = new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW);
 		List<Borrowing> result = Collections.singletonList(borrowing);
-		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL))
-		.thenReturn(result);
+		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL)).thenReturn(result);
 		bookService.returnAllBooksByBorrower(BORROWER_EMAIL);
 		verify(borrowingRepository).delete(borrowing);
 	}
@@ -51,12 +50,11 @@ public class StandardBookServiceTest {
 	public void shouldReturnByBorrowerAndIsbn() {
 		Borrowing borrowing = new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW);
 		List<Borrowing> result = Collections.singletonList(borrowing);
-		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL))
-		.thenReturn(result);
+		when(borrowingRepository.findBorrowingsByBorrower(BORROWER_EMAIL)).thenReturn(result);
 		when(bookRepository.findBookByIsbn("isbn")).thenReturn(TEST_BOOK);
 		when(borrowingRepository.findBorrowingForBook(TEST_BOOK)).thenReturn(borrowing);
-		bookService.returnSingleBookByIsbn("isbn");
-		
+		bookService.returnSingleBookByBorrowerAndIsbn(BORROWER_EMAIL, "isbn");
+
 		verify(borrowingRepository).delete(borrowing);
 	}
 
@@ -71,15 +69,16 @@ public class StandardBookServiceTest {
 
 	@Test(expected = BookAlreadyBorrowedException.class)
 	public void shouldThrowExceptionWhenBookAlreadyBorrowed() throws Exception {
-		when(borrowingRepository.findBorrowingForBook(TEST_BOOK)).thenReturn(new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW));
+		when(borrowingRepository.findBorrowingForBook(TEST_BOOK))
+				.thenReturn(new Borrowing(TEST_BOOK, BORROWER_EMAIL, NOW));
 		bookService.borrowBook(TEST_BOOK, BORROWER_EMAIL);
 	}
 
 	@Test
 	public void shouldCreateBook() throws Exception {
 		ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
-		bookService.createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(), TEST_BOOK.getEdition(),
-				TEST_BOOK.getIsbn(), TEST_BOOK.getYearOfPublication());
+		bookService.createBook(TEST_BOOK.getTitle(), TEST_BOOK.getAuthor(), TEST_BOOK.getEdition(), TEST_BOOK.getIsbn(),
+				TEST_BOOK.getYearOfPublication());
 		verify(bookRepository).save(bookArgumentCaptor.capture());
 		assertThat(bookArgumentCaptor.getValue().getTitle(), is(TEST_BOOK.getTitle()));
 		assertThat(bookArgumentCaptor.getValue().getAuthor(), is(TEST_BOOK.getAuthor()));

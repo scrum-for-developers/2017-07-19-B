@@ -49,4 +49,16 @@ public class Borrowing implements Serializable {
 		// for JPA
 	}
 
+	public Book getBorrowedBook() {
+		return borrowedBook;
+	}
+
+	public void setBorrowedBook(Book borrowedBook) {
+		this.borrowedBook = borrowedBook;
+	}
+
+	public void setBorrowerEmailAddress(String borrowerEmailAddress) {
+		this.borrowerEmailAddress = borrowerEmailAddress;
+	}
+
 }

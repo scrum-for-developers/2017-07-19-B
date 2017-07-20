@@ -9,7 +9,7 @@ public interface BookService {
 
 	void returnAllBooksByBorrower(String string);
 
-	void returnSingleBookByIsbn(String isbn);
+	void returnSingleBookByBorrowerAndIsbn(String borrower, String isbn);
 
 	void borrowBook(Book book, String borrower) throws BookAlreadyBorrowedException;
 

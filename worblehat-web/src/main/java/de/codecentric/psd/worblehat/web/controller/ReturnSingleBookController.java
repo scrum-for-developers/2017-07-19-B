@@ -38,7 +38,7 @@ public class ReturnSingleBookController {
 		if (result.hasErrors()) {
 			return "returnSingleBook";
 		} else {
-			bookService.returnSingleBookByIsbn(formData.getIsbn());
+			bookService.returnSingleBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn());
 			return "home";
 		}
 	}

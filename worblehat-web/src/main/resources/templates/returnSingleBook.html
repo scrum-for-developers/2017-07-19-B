@@ -9,7 +9,11 @@
 	<form th:object="${returnSingleBookFormData}" method="POST">
 		ISBN:<input id="isbn" type="text" th:field="*{isbn}" /> <span
 			th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span> <br />
-		<input type="submit"
+		Email Address:<input id="emailAddress" type="text"
+			th:field="*{emailAddress}" /> <span
+			th:if="${#fields.hasErrors('emailAddress')}"
+			th:errors="*{emailAddress}"></span> <br /> 
+	<input type="submit"
 			id="returnSingleBook" value="Return a single Book" />
 	</form>
 	<hr />
