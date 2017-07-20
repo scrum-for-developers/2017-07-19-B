@@ -5,4 +5,6 @@
 
 	<include file="de/codecentric/psd/worblehat/liquibase-changesets/version-1.0/001-initialize-db.sql" />
 	<include file="de/codecentric/psd/worblehat/liquibase-changesets/version-1.0/002-initialize-db.sql" />
+    <include file="de/codecentric/psd/worblehat/liquibase-changesets/version-1.0/003-alter_description_length.sql" />
+	
 </databaseChangeLog> 
