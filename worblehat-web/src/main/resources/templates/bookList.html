@@ -1,34 +1,55 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Show all Books</title>
+<title>Show all Books</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+ul {
+	list-style-type: none;
+	margin: 10px 0 0 -25px;
+}
+</style>
 </head>
 <body>
-	<table class="bookList">
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Year</th>
-			<th>Edition</th>
-			<th>ISBN</th>
-			<th>Description</th>
-			<th>Borrower</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr th:each="book : ${books}">
-			<td th:text="${book.title}">Harry Potter</td>
-			<td th:text="${book.author}">J.K. Rowling</td>
-			<td th:text="${book.yearOfPublication}">2002</td>
-			<td th:text="${book.edition}">1st</td>
-			<td th:text="${book.isbn}">123456</td>
-			<td th:text="${book.description}">cool Harry Potter book</td>
-			<td th:text="${book.borrowerEmail}">someone@codecentric.de</td>
-		</tr>
-	</tbody>
-	</table>
-	<hr />
-	<a th:href="@{/}">Back to Home</a>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2">
+				<ul th:replace="home :: menu"></ul>
+			</div>
+			<div class="col-lg-10">
+				<h1>All Books in The Library</h1>
+				<table class="bookList table table-striped">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Author</th>
+							<th>Year</th>
+							<th>Edition</th>
+							<th>ISBN</th>
+							<th>Description</th>
+							<th>Borrower</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="book : ${books}">
+							<td th:text="${book.title}">Harry Potter</td>
+							<td th:text="${book.author}">J.K. Rowling</td>
+							<td th:text="${book.yearOfPublication}">2002</td>
+							<td th:text="${book.edition}">1st</td>
+							<td th:text="${book.isbn}">123456</td>
+							<td th:text="${book.description}">cool Harry Potter book</td>
+							<td th:text="${book.borrowerEmail}">someone@codecentric.de</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<hr />
+		<a th:href="@{/}">Back to Home</a>
+	</div>
+
 </body>
 </html>

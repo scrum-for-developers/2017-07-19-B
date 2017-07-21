@@ -1,34 +1,87 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"><head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
 <title>Add Book - Worblehat Bookmanager</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+ul {
+	list-style-type: none;
+	margin: 10px 0 0 -25px;
+}
+</style>
 </head>
 <body>
-	<h1>Add Book</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2">
+				<ul th:replace="home :: menu"></ul>
+			</div>
+			<div class="col-lg-10">
+				<h1>Add Book</h1>
 
-	<form th:object="${bookDataFormData}" method="POST">
-			Title:<input type="text" th:field="*{title}" />
-		<span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-		<br />
-			Edition:<input type="text" th:field="*{edition}" />
-		<span class="error" th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
-		<br />
-			ISBN:<input type="text" th:field="*{isbn}" />
-		<span class="error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-		<br />
-			Author:<input type="text" th:field="*{author}" />
-		<span class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
-		<br />
-			Year:<input type="text" th:field="*{yearOfPublication}" />
-		<span class="error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
-		<br />
-			Description:<textarea th:field="*{description}"></textarea>
-		<span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-		<br />
-		<input type="submit" id="addBook" value="Add Book" />
-		<hr/>
+				<form th:object="${bookDataFormData}" method="POST">
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Title:</label> <input class="form-control" type="text"
+								th:field="*{title}" />
+							<p class="bg-danger" th:if="${#fields.hasErrors('title')}"
+								th:errors="*{title}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Edition:</label> <input class="form-control" type="text"
+								th:field="*{edition}" />
+
+							<p class="bg-danger" th:if="${#fields.hasErrors('edition')}"
+								th:errors="*{edition}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>ISBN:</label> <input class="form-control" type="text"
+								th:field="*{isbn}" />
+							<p class="bg-danger" th:if="${#fields.hasErrors('isbn')}"
+								th:errors="*{isbn}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Author:</label> <input class="form-control" type="text"
+								th:field="*{author}" />
+							<p class="bg-danger" th:if="${#fields.hasErrors('author')}"
+								th:errors="*{author}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Year:</label> <input class="form-control" type="text"
+								th:field="*{yearOfPublication}" />
+							<p class="bg-danger"
+								th:if="${#fields.hasErrors('yearOfPublication')}"
+								th:errors="*{yearOfPublication}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Description:</label>
+							<textarea class="form-control" th:field="*{description}"></textarea>
+							<p class="bg-danger" th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<input class="btn btn-primary" type="submit" id="addBook"
+								value="Add Book" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<hr />
 		<a th:href="@{/}">Back to Home</a>
-	</form>
-
-
+	</div>
 </body>
 </html>

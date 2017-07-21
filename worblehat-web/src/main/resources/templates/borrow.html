@@ -2,22 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Borrow book - Worblehat Bookmanager</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+ul {
+	list-style-type: none;
+	margin: 10px 0 0 -25px;
+}
+</style>
 </head>
 <body>
-	<h1>Borrow Book</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2">
+				<ul th:replace="home :: menu"></ul>
+			</div>
+			<div class="col-lg-10">
+				<h1>Borrow Book</h1>
 
-	<form th:object="${borrowFormData}" method="POST">
-		ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
-		<span id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-		<br />
-		Email:<input id="email" type="text" th:field="*{email}" />
-		<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-		<br />
-		<input type="submit" id="borrowBook" value="Borrow Book" />
+				<form th:object="${borrowFormData}" method="POST">
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>ISBN:</label> <input class="form-control" id="isbn"
+								type="text" th:field="*{isbn}" />
+							<p class="bg-danger" id="isbn-error"
+								th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Email:</label> <input class=" form-control" id="email"
+								type="text" th:field="*{email}" />
+							<p class="bg-danger" th:if="${#fields.hasErrors('email')}"
+								th:errors="*{email}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<input class="btn btn-primary" type="submit" id="borrowBook"
+								value="Borrow Book" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 		<hr />
 		<a th:href="@{/}">Back to Home</a>
-	</form>
-
+	</div>
 
 </body>
 </html>

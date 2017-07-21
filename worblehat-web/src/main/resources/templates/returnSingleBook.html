@@ -2,21 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Return a single Book - Worblehat Bookmanager</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+ul {
+	list-style-type: none;
+	margin: 10px 0 0 -25px;
+}
+</style>
 </head>
 <body>
-	<h1>Return a single Book</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-2">
+				<ul th:replace="home :: menu"></ul>
+			</div>
+			<div class="col-lg-10">
+				<h1>Return a single Book</h1>
 
-	<form th:object="${returnSingleBookFormData}" method="POST">
-		ISBN:<input id="isbn" type="text" th:field="*{isbn}" /> <span
-			th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span> <br />
-		Email Address:<input id="emailAddress" type="text"
-			th:field="*{emailAddress}" /> <span
-			th:if="${#fields.hasErrors('emailAddress')}"
-			th:errors="*{emailAddress}"></span> <br /> 
-	<input type="submit"
-			id="returnSingleBook" value="Return a single Book" />
-	</form>
-	<hr />
-	<a th:href="@{/}">Back to Home</a>
+				<form th:object="${returnSingleBookFormData}" method="POST">
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>ISBN:</label> <input class="form-control" id="isbn"
+								type="text" th:field="*{isbn}" />
+							<p class="bg-danger" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<label>Email Address:</label> 
+							<input class="form-control" id="emailAddress"
+								type="text" th:field="*{emailAddress}" />
+							<p class="bg-danger" th:if="${#fields.hasErrors('emailAddress')}"
+								th:errors="*{emailAddress}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-3">
+							<input class="btn btn-primary" type="submit"
+								id="returnSingleBook" value="Return a single Book" />
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+		<hr />
+		<a th:href="@{/}">Back to Home</a>
+	</div>
 </body>
 </html>
