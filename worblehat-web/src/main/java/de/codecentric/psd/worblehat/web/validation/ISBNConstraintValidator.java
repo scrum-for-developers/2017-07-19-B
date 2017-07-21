@@ -14,9 +14,12 @@ public class ISBNConstraintValidator implements ConstraintValidator<ISBN, String
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		// Don't validate null, empty and blank strings, since these are validated by @NotNull, @NotEmpty and @NotBlank
-		if(StringUtils.isNotBlank(value)) {
-			return ISBNValidator.getInstance().isValidISBN10(value);
+		// Don't validate null, empty and blank strings, since these are
+		// validated by @NotNull, @NotEmpty and @NotBlank
+		if (StringUtils.isNotBlank(value)) {
+			// Workaround for bug in apache regex
+			String valueWithoutHyphen = value.replaceAll("-", "");
+			return ISBNValidator.getInstance().isValidISBN10(valueWithoutHyphen) || ISBNValidator.getInstance().isValidISBN13(valueWithoutHyphen);
 		}
 		return true;
 	}
