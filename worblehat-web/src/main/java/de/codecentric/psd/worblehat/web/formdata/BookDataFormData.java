@@ -1,5 +1,6 @@
 package de.codecentric.psd.worblehat.web.formdata;
 
+import de.codecentric.psd.worblehat.web.validation.CheckExist;
 import de.codecentric.psd.worblehat.web.validation.ISBN;
 import de.codecentric.psd.worblehat.web.validation.Numeric;
 import org.hibernate.validator.constraints.Length;
@@ -24,6 +25,7 @@ public class BookDataFormData {
 
 	@NotEmpty(message = "{empty.bookDataFormData.isbn}")
 	@ISBN(message = "{notvalid.bookDataFormData.isbn}")
+	@CheckExist(message = "{invalid.duplicate.bookDataFormData.isbn}")
 	private String isbn;
 
 	@NotEmpty(message = "{empty.bookDataFormData.author}")
