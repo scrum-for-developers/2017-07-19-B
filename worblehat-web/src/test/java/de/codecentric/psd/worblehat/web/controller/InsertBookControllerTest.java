@@ -61,7 +61,7 @@ public class InsertBookControllerTest {
 	@Test
 	public void shouldCreateNewCopyOfExistingBook() throws Exception {
 		setupFormData();
-		when(bookService.bookExists(TEST_BOOK.getIsbn())).thenReturn(true);
+		when(bookService.bookExists(TEST_BOOK.getIsbn())).thenReturn(false);
 
 		String navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult);
 
