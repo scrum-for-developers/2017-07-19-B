@@ -25,12 +25,9 @@ public class CheckExistConstraintValidator implements ConstraintValidator<CheckE
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		// Don't validate null, empty and blank strings, since these are validated by @NotNull, @NotEmpty and @NotBlank
 		if(StringUtils.isNotBlank(value)) {
-			//return StringUtils.isNumeric(value);
-			boolean test = bookService.bookExists(value);
-			return test;
-			//return false;
+			return !bookService.bookExists(value);
 		}
-		return true;
+		return false;
 	}
 
 }
